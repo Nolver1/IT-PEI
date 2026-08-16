@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Documentos PEI - CEPLAN</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-section">
+                <h1>🏛️ CEPLAN - Sistema Nacional de Planeamiento Estratégico</h1>
+                <p class="subtitle">Generador Automático de Documentos PEI</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <form id="formularioPEI" class="formulario">
+                
+                <!-- SECCIÓN 1: INFORMACIÓN TEMPORAL -->
+                <section class="seccion">
+                    <h2 class="seccion-titulo">📅 1. Información Temporal</h2>
+                    
+                    <div class="campo">
+                        <label for="fechaHoy" class="label">Fecha de emisión del documento <span class="requerido">*</span></label>
+                        <input type="date" id="fechaHoy" name="fechaHoy" required class="input">
+                        <small class="ayuda">Se convertirá a formato: "18 de agosto de 2025"</small>
+                    </div>
+
+                    <div class="campo">
+                        <label for="periodoPEI" class="label">Periodo del PEI <span class="requerido">*</span></label>
+                        <input type="text" id="periodoPEI" name="periodoPEI" required 
+                               placeholder="Ej: 2026-2030" pattern="\d{4}-\d{4}" class="input">
+                        <small class="ayuda">Formato: YYYY-YYYY (Ej: 2026-2030)</small>
+                    </div>
+
+                    <div class="campo">
+                        <label for="fechaOficioMunicipalidad" class="label">Fecha del oficio de la municipalidad <span class="requerido">*</span></label>
+                        <input type="date" id="fechaOficioMunicipalidad" name="fechaOficioMunicipalidad" required class="input">
+                        <small class="ayuda">Se convertirá a formato: "15 de enero de 2026"</small>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2: INFORMACIÓN DE LA MUNICIPALIDAD -->
+                <section class="seccion">
+                    <h2 class="seccion-titulo">🏢 2. Información de la Municipalidad</h2>
+                    
+                    <div class="campo">
+                        <label for="nombreMunicipalidad" class="label">Nombre oficial completo <span class="requerido">*</span></label>
+                        <input type="text" id="nombreMunicipalidad" name="nombreMunicipalidad" required 
+                               maxlength="150" placeholder="Ej: Municipalidad Distrital de San Isidro" class="input">
+                    </div>
+
+                    <div class="campo">
+                        <label for="codigoPliego" class="label">Código de pliego presupuestal <span class="requerido">*</span></label>
+                        <input type="text" id="codigoPliego" name="codigoPliego" required 
+                               pattern="\d{6}" placeholder="Ej: 301534" maxlength="6" class="input">
+                        <small class="ayuda">6 dígitos numéricos</small>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <div class="campo">
+                            <label for="departamento" class="label">Departamento/Región <span class="requerido">*</span></label>
+                            <input type="text" id="departamento" name="departamento" required 
+                                   maxlength="100" placeholder="Ej: Lima" class="input">
+                        </div>
+
+                        <div class="campo">
+                            <label for="provincia" class="label">Provincia <span class="requerido">*</span></label>
+                            <input type="text" id="provincia" name="provincia" required 
+                                   maxlength="100" placeholder="Ej: Lima" class="input">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3: INFORMACIÓN DEL REPRESENTANTE -->
+                <section class="seccion">
+                    <h2 class="seccion-titulo">👤 3. Información del Representante</h2>
+                    
+                    <div class="campo">
+                        <label for="nombreRepresentante" class="label">Nombre completo del representante <span class="requerido">*</span></label>
+                        <input type="text" id="nombreRepresentante" name="nombreRepresentante" required 
+                               maxlength="100" placeholder="Ej: Juan Carlos Pérez Flores" class="input">
+                    </div>
+
+                    <div class="campo">
+                        <label for="cargoRepresentante" class="label">Cargo del representante <span class="requerido">*</span></label>
+                        <input type="text" id="cargoRepresentante" name="cargoRepresentante" required 
+                               maxlength="100" placeholder="Ej: Alcalde" class="input">
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 4: DOCUMENTACIÓN ADMINISTRATIVA -->
+                <section class="seccion">
+                    <h2 class="seccion-titulo">📋 4. Documentación Administrativa</h2>
+                    
+                    <div class="campo">
+                        <label for="numeroOficioMunicipalidad" class="label">Número del oficio de la municipalidad <span class="requerido">*</span></label>
+                        <input type="text" id="numeroOficioMunicipalidad" name="numeroOficioMunicipalidad" required 
+                               placeholder="Ej: 012-2026-MDSI/A" class="input">
+                    </div>
+
+                    <div class="campo">
+                        <label for="numeroExpediente" class="label">Número de expediente administrativo <span class="requerido">*</span></label>
+                        <input type="text" id="numeroExpediente" name="numeroExpediente" required 
+                               placeholder="Ej: 2025-01234" class="input">
+                    </div>
+
+                    <div class="campo">
+                        <label for="numeroResolucionGrupoTrabajo" class="label">Número de Resolución de Alcaldía (Grupo de Trabajo) <span class="requerido">*</span></label>
+                        <input type="text" id="numeroResolucionGrupoTrabajo" name="numeroResolucionGrupoTrabajo" required 
+                               placeholder="Ej: 045-2025-MDSI/A" class="input">
+                    </div>
+
+                    <div class="campo">
+                        <label for="ordenanzaPlanDesarrollo" class="label">Número de Ordenanza del Plan de Desarrollo Concertado <span class="requerido">*</span></label>
+                        <input type="text" id="ordenanzaPlanDesarrollo" name="ordenanzaPlanDesarrollo" required 
+                               placeholder="Ej: 015-2024-MDSI" class="input">
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 5: INFORMACIÓN DEL PROCESO DE FORMULACIÓN -->
+                <section class="seccion">
+                    <h2 class="seccion-titulo">📊 5. Información del Proceso de Formulación</h2>
+                    
+                    <div class="campo">
+                        <label for="numeroRevisiones" class="label">Número de revisiones previas realizadas <span class="requerido">*</span></label>
+                        <input type="number" id="numeroRevisiones" name="numeroRevisiones" required 
+                               min="1" placeholder="Ej: 3" class="input">
+                    </div>
+
+                    <div class="campo">
+                        <label for="planDesarrolloConcertado" class="label">Nombre del plan superior (PDLC/PDRC) <span class="requerido">*</span></label>
+                        <input type="text" id="planDesarrolloConcertado" name="planDesarrolloConcertado" required 
+                               maxlength="200" placeholder="Ej: Plan de Desarrollo Local Concertado del Distrito de San Isidro 2023-2030" class="input">
+                    </div>
+
+                    <div class="campo-grupo">
+                        <div class="campo">
+                            <label for="numeroOEI" class="label">Número de Objetivos Estratégicos Institucionales (OEI) <span class="requerido">*</span></label>
+                            <input type="number" id="numeroOEI" name="numeroOEI" required 
+                                   min="1" placeholder="Ej: 5" class="input">
+                        </div>
+
+                        <div class="campo">
+                            <label for="numeroAEI" class="label">Número de Acciones Estratégicas Institucionales (AEI) <span class="requerido">*</span></label>
+                            <input type="number" id="numeroAEI" name="numeroAEI" required 
+                                   min="1" placeholder="Ej: 15" class="input">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 6: INFORMACIÓN DEL ESPECIALISTA DE CEPLAN -->
+                <section class="seccion">
+                    <h2 class="seccion-titulo">🧑‍💼 6. Información del Especialista de CEPLAN</h2>
+                    
+                    <div class="campo">
+                        <label for="nombreEspecialista" class="label">Nombre completo del especialista <span class="requerido">*</span></label>
+                        <input type="text" id="nombreEspecialista" name="nombreEspecialista" required 
+                               maxlength="100" placeholder="Ej: Lleny García Flores" class="input">
+                    </div>
+                </section>
+
+                <!-- BOTONES DE ACCIÓN -->
+                <div class="botones-accion">
+                    <button type="button" id="btnLimpiar" class="btn btn-secundario">
+                        🗑️ Limpiar Formulario
+                    </button>
+                    <button type="submit" id="btnGenerar" class="btn btn-principal">
+                        📄 Generar Documentos
+                    </button>
+                </div>
+
+                <!-- INDICADOR DE CARGA -->
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Generando documentos, por favor espere...</p>
+                </div>
+            </form>
+
+            <!-- ÁREA DE RESULTADOS -->
+            <div id="resultados" class="resultados hidden">
+                <h2 class="resultados-titulo">✅ Documentos Generados Exitosamente</h2>
+                <p class="resultados-descripcion">Los documentos han sido generados correctamente. Puede descargarlos usando los botones a continuación:</p>
+                
+                <div class="archivos-generados">
+                    <div class="archivo-item">
+                        <div class="archivo-info">
+                            <span class="archivo-icono">📋</span>
+                            <div>
+                                <p class="archivo-nombre" id="nombreIT">Informe_Tecnico_PEI.docx</p>
+                                <p class="archivo-tipo">Informe Técnico PEI</p>
+                            </div>
+                        </div>
+                        <a id="btnDescargarIT" href="#" download class="btn btn-descarga">
+                            ⬇️ Descargar
+                        </a>
+                    </div>
+
+                    <div class="archivo-item">
+                        <div class="archivo-info">
+                            <span class="archivo-icono">✉️</span>
+                            <div>
+                                <p class="archivo-nombre" id="nombreOficio">Oficio_PEI.docx</p>
+                                <p class="archivo-tipo">Oficio PEI</p>
+                            </div>
+                        </div>
+                        <a id="btnDescargarOficio" href="#" download class="btn btn-descarga">
+                            ⬇️ Descargar
+                        </a>
+                    </div>
+                </div>
+
+                <button id="btnNuevoFormulario" class="btn btn-principal">
+                    ➕ Generar Nuevos Documentos
+                </button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Centro Nacional de Planeamiento Estratégico - CEPLAN</p>
+            <p>Sistema Nacional de Planeamiento Estratégico - SINAPLAN</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
